@@ -12,7 +12,7 @@ The objective is to design a **channel autoencoder** for end-to-end communicatio
 An autoencoder is a neural network composed of three main blocks:
 **Encoder** , **Channel** ,**Decoder**
 
-In classical machine learning, the goal of an autoencoder is to learn a **low-dimensional representation** of an input $x$, such that it can be reconstructed at the output \( \hat{x} \) with minimal error.
+In classical machine learning, the goal of an autoencoder is to learn a **low-dimensional representation** of an input $x$, such that it can be reconstructed at the output x̂ with minimal error.
 
 ---
 
@@ -25,9 +25,7 @@ Each message is encoded using **one-hot encoding** into a vector:
 
 The system then operates as follows:
 
-\[
-\mathbf{x} \rightarrow \text{Encoder} \rightarrow \mathbf{z} \rightarrow \text{Channel} \rightarrow \mathbf{y} \rightarrow \text{Decoder} \rightarrow \hat{s}
-\]
+x → Encoder → z → Channel → y → Decoder → ŝ
 
 - The **encoder** maps messages to a continuous representation \( \mathbf{z} \in \mathbb{R}^n \)
 - The **channel** adds noise (AWGN)
@@ -56,23 +54,23 @@ This corresponds to **maximizing the likelihood of correct decoding**.
 The architecture follows the structure proposed in the paper:
 
 ### Encoder
-- Linear layer: \( M \rightarrow M \) + ReLU
-- Linear layer: \( M \rightarrow n \)
+- Linear layer: \( M → M \) + ReLU
+- Linear layer: \( M → n \)
 - Power normalization (unit energy constraint)
 
 ### Channel
 - AWGN channel: y = z + n , where n ~ N(0, σ²)
 
 ### Decoder
-- Linear layer: \( n \rightarrow M \) + ReLU
-- Linear layer: \( M \rightarrow M \)
-- Output interpreted as logits (softmax applied implicitly via loss)
+- Linear layer: \( n → M \) + ReLU
+- Linear layer: \( M → M \)
+- Output interpreted as logits
 
 ---
 
 ## Training Setup
 
-- Messages are randomly sampled from \( \{0, \dots, M-1\} \)
+- Messages are randomly sampled from {0, ..., M-1}
 - One-hot encoding is used as input
 - Training is performed using stochastic gradient descent
 - A fixed SNR (SNR = 10dB) is used during training
@@ -83,7 +81,7 @@ The architecture follows the structure proposed in the paper:
 
 ## Learned Constellation
 
-The learned encoder representation forms a constellation in \( \mathbb{R}^2 \).
+The learned encoder representation forms a constellation in ℝ².
 
 It can be observed that the model **automatically discovers a QPSK like constellation**, where points are symmetrically distributed to maximize robustness against noise.
 
@@ -95,9 +93,7 @@ This demonstrates that the network is capable of **learning optimal modulation s
 
 The performance is evaluated using the **Symbol Error Rate (SER)**:
 
-\[
-\text{SER} = P(\hat{s} \neq s)
-\]
+SER = P(ŝ ≠ s)
 
 We compare:
 
