@@ -20,15 +20,14 @@ In classical machine learning, the goal of an autoencoder is to learn a **low-di
 
 In this project, the objective is different. We consider a set of discrete messages: s ∈ {0, 1, ..., M-1}
 
-Each message is encoded using **one-hot encoding** into a vector:
-\[\mathbf{x} \in \{0,1\}^M\]
+Each message is encoded using **one-hot encoding** into a vector x ∈ {0,1}^M
 
 The system then operates as follows:
 
 x → Encoder → z → Channel → y → Decoder → ŝ
 
-- The **encoder** maps messages to a continuous representation \( \mathbf{z} \in \mathbb{R}^n \)
-- The **channel** adds noise (AWGN)
+- The **encoder** maps messages to a continuous representation z ∈ ℝⁿ
+- The **channel** adds an awgn noise
 - The **decoder** estimates the transmitted message
 
 ---
