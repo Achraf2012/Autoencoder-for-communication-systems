@@ -10,10 +10,7 @@ The objective is to design a **channel autoencoder** for end-to-end communicatio
 # 1. Autoencoder Architecture for Communication
 
 An autoencoder is a neural network composed of three main blocks:
-
-- **Encoder**
-- **Channel**
-- **Decoder**
+**Encoder** , **Channel** ,**Decoder**
 
 In classical machine learning, the goal of an autoencoder is to learn a **low-dimensional representation** of an input $x$, such that it can be reconstructed at the output \( \hat{x} \) with minimal error.
 
@@ -21,8 +18,7 @@ In classical machine learning, the goal of an autoencoder is to learn a **low-di
 
 ## Communication Perspective
 
-In this project, the objective is different. We consider a set of discrete messages:
-\[ s \in \{0, 1, \dots, M-1\} \]
+In this project, the objective is different. We consider a set of discrete messages: s ∈ {0, 1, ..., M-1}
 
 Each message is encoded using **one-hot encoding** into a vector:
 \[\mathbf{x} \in \{0,1\}^M\]
@@ -41,9 +37,7 @@ The system then operates as follows:
 
 ## Key Idea
 
-Unlike classical autoencoders, the goal here is **not compression**, but:
-
-> Learning a representation that is **robust to channel noise**
+Unlike classical autoencoders, the goal here is **not compression**, but learning a representation that is **robust to channel noise**
 
 The encoder learns a signal representation that minimizes decoding errors after transmission through the noisy channel.
 
@@ -51,11 +45,7 @@ The encoder learns a signal representation that minimizes decoding errors after 
 
 ## Loss Function
 
-The model is trained using the **categorical cross-entropy loss**:
-
-\[
-\mathcal{L} = - \log P(\hat{s} = s \mid \mathbf{y})
-\]
+The model is trained using the **categorical cross-entropy loss**: L = -log P(ŝ = s | y)
 
 This corresponds to **maximizing the likelihood of correct decoding**.
 
@@ -71,11 +61,7 @@ The architecture follows the structure proposed in the paper:
 - Power normalization (unit energy constraint)
 
 ### Channel
-- AWGN channel:
-\[
-\mathbf{y} = \mathbf{z} + \mathbf{n}
-\]
-where \( \mathbf{n} \sim \mathcal{N}(0, \sigma^2) \)
+- AWGN channel: y = z + n , where n ~ N(0, σ²)
 
 ### Decoder
 - Linear layer: \( n \rightarrow M \) + ReLU
